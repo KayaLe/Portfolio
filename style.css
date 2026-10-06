@@ -1,0 +1,427 @@
+/* ============================================================
+   FARBPALETTE — direkt aus deiner Vorlage übernommen.
+   Willst du einen Ton ändern, reicht es, den Hex-Wert hier
+   anzupassen — die ganze Seite (alle Unterseiten) zieht nach,
+   da alle Dateien dieses eine style.css einbinden.
+   ============================================================ */
+/* ============================================================
+   1) FARBEN — nur hier ändern, die ganze Seite zieht nach.
+   ============================================================ */
+:root {
+  --green:   #6FBA99;   /* Grün */
+  --mint:    #BFE3D6;   /* Mint */
+  --pink:    #E983A3;   /* Pink */
+  --crimson: #A82444;   /* Dunkelrot (Hauptakzent für Text/Buttons) */
+  --black:   #000000;
+  --white:   #FFFFFF;
+
+  /* abgeleitete, hellere/dunklere Töne aus deinen Farben */
+  --pink-soft:  color-mix(in srgb, var(--pink) 22%, white);
+  --mint-soft:  color-mix(in srgb, var(--mint) 45%, white);
+  --green-deep: color-mix(in srgb, var(--green) 65%, black);  /* lesbares Grün für Text */
+
+  /* alte Namen bleiben bestehen, zeigen aber auf die neuen Farben */
+  --growing-pink: var(--crimson);
+  --sleeping-pink: var(--pink);
+  --shy-pink: var(--pink-soft);
+  --tulipe-green: var(--green);
+  --grounding-green: var(--green-deep);
+  --sleeping-green: var(--black);
+
+  --bg: var(--white);
+  --ink: var(--black);
+  --ink-soft: color-mix(in srgb, black 68%, white);
+  --line: color-mix(in srgb, black 12%, white);
+  --paper: var(--white);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+h1, h2, h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.signature {
+  font-family: 'Yellowtail', cursive;
+  font-weight: 400;
+  color: var(--growing-pink);
+}
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+section { scroll-margin-top: 78px; }
+
+/* ---------- Top nav (alle Seiten) ---------- */
+
+header.top {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.top .mark { font-family: 'Yellowtail', cursive; font-size: 1.7rem; color: var(--growing-pink); text-decoration: none; }
+.top nav { display: flex; gap: 22px; }
+.top nav a {
+  text-decoration: none; font-size: 0.88rem; font-weight: 500;
+  color: var(--ink-soft); padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.top nav a:hover, .top nav a.active { color: var(--growing-pink); border-color: var(--growing-pink); }
+
+@media (max-width: 760px) { .top nav { display: none; } }
+
+/* ---------- Hero (plakativ) ---------- */
+
+.hero { position: relative; overflow: hidden; padding: 88px 0 64px; }
+
+
+.hero-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; align-items: center;
+}
+
+.hero-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+  color: var(--grounding-green); text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 18px;
+}
+
+.hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.02; }
+.hero h1 .signature { font-size: 1.05em; }
+
+.hero .role {
+  margin-top: 18px; font-size: 1.1rem; font-weight: 500; color: var(--sleeping-green);
+}
+
+.hero p.lede { margin-top: 18px; max-width: 48ch; color: var(--ink-soft); font-size: 1.02rem; }
+
+.hero .chips { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+.chip {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+  padding: 10px 18px; border-radius: 30px; text-decoration: none; font-weight: 500;
+  border: 1.5px solid var(--grounding-green);
+}
+.chip.solid { background: var(--growing-pink); color: #fff; border-color: var(--growing-pink); }
+.chip.solid:hover { background: var(--sleeping-green); border-color: var(--sleeping-green); }
+.chip.outline { color: var(--grounding-green); }
+.chip.outline:hover { background: var(--grounding-green); color: #fff; }
+
+/* 2) PORTRAIT — abgerundete Ecken: border-radius beim img ändern.
+      Die bunten Punkte (.dot) liegen HINTER dem Bild (z-index 0)
+      und schauen nur teilweise hervor. Position/Grösse pro Punkt anpassbar. */
+.hero-portrait { position: relative; z-index: 1; width: 300px; height: 100%; justify-self: center; }
+.hero-portrait img {
+  position: relative; z-index: 1; display: block;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  border-radius: 28px;
+  box-shadow: 0 18px 30px rgba(0,0,0,0.18);
+}
+.dot { position: absolute; border-radius: 50%; z-index: 0; }
+.dot.d1 { width: 190px; height: 190px; background: var(--pink);    top: -60px;   right: -75px; }
+.dot.d2 { width: 130px; height: 130px; background: var(--green);   bottom: -45px; left: -60px; }
+.dot.d3 { width: 90px;  height: 90px;  background: var(--mint);    bottom: 40px;  right: -50px; }
+.dot.d4 { width: 60px;  height: 60px;  background: var(--crimson); top: 30px;     left: -32px; }
+
+@media (max-width: 680px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-portrait { width: 200px; height: 260px; justify-self: start; }
+}
+
+/* ---------- Section shell ---------- */
+
+section.block { padding: 66px 0; }
+.tint-pink { background: var(--shy-pink); }
+.tint-white { background: var(--paper); }
+
+.section-head { margin-bottom: 36px; }
+.section-head .eyebrow {
+  display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem;
+  color: var(--growing-pink); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+}
+.section-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+.section-head p.sub { margin: 10px 0 0; color: var(--ink-soft); max-width: 60ch; }
+
+/* ---------- About ---------- */
+
+.about-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; align-items: start; }
+.about-grid p { color: var(--ink-soft); max-width: 62ch; }
+.about-grid p + p { margin-top: 14px; }
+
+.about-quote {
+  background: var(--paper); border-left: 4px solid var(--growing-pink);
+  padding: 20px 22px; border-radius: 4px; font-family: 'Fraunces', serif; font-style: italic; font-size: 1.05rem;
+  color: var(--sleeping-green);
+}
+
+/* ---------- Funfacts ---------- */
+
+.funfacts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.funfact {
+  background: var(--paper); border-radius: 18px; padding: 24px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.funfact .ico { width: 26px; height: 26px; color: var(--tulipe-green); margin-bottom: 12px; }
+.funfact dt {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; text-transform: uppercase;
+  color: var(--growing-pink); letter-spacing: 0.04em;
+}
+.funfact dd { margin: 5px 0 0; font-size: 0.98rem; font-weight: 500; }
+
+@media (max-width: 820px) { .funfacts-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Strengths (mit Icon) ---------- */
+
+.strengths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.strength {
+  background: var(--paper); border-radius: 18px; padding: 26px 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+.strength .ico {
+  width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--shy-pink); color: var(--growing-pink);
+}
+.strength:nth-child(even) .ico { background: var(--mint-soft); color: var(--grounding-green); }
+.strength .ico svg { width: 20px; height: 20px; }
+.strength h3 { font-size: 1.02rem; margin-bottom: 6px; }
+.strength p { margin: 0; font-size: 0.88rem; color: var(--ink-soft); }
+
+@media (max-width: 820px) { .strengths { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .strengths { grid-template-columns: 1fr; } }
+
+/* ---------- Skills ---------- */
+
+.skills-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 56px; }
+.skill-group h3 { font-family: 'Inter', sans-serif; font-size: 0.98rem; font-weight: 700; margin-bottom: 14px; }
+.skill-group:nth-child(1) h3 { color: var(--growing-pink); }
+.skill-group:nth-child(2) h3 { color: var(--grounding-green); }
+
+.skill-row {
+  display: flex; align-items: center; justify-content: space-between; padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.skill-row .name { font-size: 0.95rem; }
+.dots { display: flex; gap: 5px; }
+.dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.dots.pink span.on { background: var(--growing-pink); }
+.dots.green span.on { background: var(--grounding-green); }
+
+@media (max-width: 720px) { .skills-groups { grid-template-columns: 1fr; } }
+.skills-note { margin-top: 24px; font-size: 0.85rem; color: var(--ink-soft); }
+
+/* ---------- Projects ---------- */
+
+.project {
+  padding: 30px 28px; border-radius: 20px; display: grid;
+  grid-template-columns: 210px 1fr; gap: 30px; margin-bottom: 16px;
+}
+/* 4) PROJEKT-BOXEN — jede Box hat eine eigene Klasse.
+      --box-bg = Hintergrund, --box-accent = Streifen links */
+.project { background: var(--box-bg, var(--pink-soft)); border-left: 6px solid var(--box-accent, var(--crimson)); }
+.proj-creative { --box-bg: var(--pink-soft); --box-accent: var(--pink); }
+.proj-apps     { --box-bg: var(--mint-soft); --box-accent: var(--green); }
+.proj-mmo      { --box-bg: color-mix(in srgb, var(--green) 28%, white); --box-accent: var(--green-deep); }
+.proj-motion   { --box-bg: color-mix(in srgb, var(--crimson) 12%, white); --box-accent: var(--crimson); }
+.project .meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--ink-soft); line-height: 1.9; }
+.project .meta strong {
+  color: var(--ink); display: block; font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: 1.15rem; margin-bottom: 10px;
+}
+.project p { margin: 0; color: var(--ink); max-width: 58ch; }
+
+@media (max-width: 720px) { .project { grid-template-columns: 1fr; } }
+
+/* ---------- Subpage link cards ---------- */
+
+.subpage-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.subpage-card {
+  position: relative; display: block; border-radius: 20px; overflow: hidden;
+  text-decoration: none; color: #fff; aspect-ratio: 3/4; background: var(--cat-bg, var(--black));
+  box-shadow: 0 12px 26px rgba(0,0,0,0.14);
+}
+/* 3) KATEGORIE-BOXEN (Fotografie, Videografie, Illustration, Design)
+      Jede Box hat eine eigene Klasse (.cat-foto usw.) mit eigenen Werten:
+      --cat-bg = Hintergrund (sichtbar, wenn kein Bild geladen ist)
+      --cat-accent = Farbe des Zähler-Kreises oben rechts
+      --cat-pos = Bildausschnitt (z. B. top, center, center 30%)
+      --cat-fit = cover (füllt) oder contain (ganzes Bild) */
+.subpage-card img { width: 100%; height: 100%; object-fit: var(--cat-fit, cover); object-position: var(--cat-pos, center); display: block; transition: transform 0.4s ease; }
+.cat-foto   { --cat-bg: var(--crimson);   --cat-accent: var(--pink);  --cat-pos: center 40%; }
+.cat-video  { --cat-bg: var(--green-deep); --cat-accent: var(--mint);  --cat-pos: center; }
+.cat-illu   { --cat-bg: var(--pink);      --cat-accent: var(--white); --cat-pos: center; }
+.cat-design { --cat-bg: var(--black);     --cat-accent: var(--green); --cat-pos: top center; }
+.subpage-card:hover img { transform: scale(1.06); }
+.subpage-card::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.78) 100%);
+}
+.subpage-card .label {
+  position: absolute; left: 18px; bottom: 16px; z-index: 1;
+  font-family: 'Fraunces', serif; font-size: 1.2rem;
+}
+.subpage-card .count {
+  position: absolute; right: 18px; top: 16px; z-index: 1;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+  background: var(--cat-accent, rgba(255,255,255,0.22)); color: var(--black); padding: 4px 10px; border-radius: 20px;
+}
+
+@media (max-width: 820px) { .subpage-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Freizeit ---------- */
+
+.personal-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.personal-head p { margin: 0; color: var(--ink-soft); font-size: 0.9rem; max-width: 42ch; }
+.personal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.personal-grid img { width: 100%; height: 230px; object-fit: contain; border-radius: 18px; display: block; background: var(--shy-pink); }
+.personal-grid span { display: block; margin-top: 9px; font-size: 0.85rem; font-weight: 500; color: var(--ink-soft); }
+
+@media (max-width: 720px) { .personal-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- Footer / Kontakt ---------- */
+
+footer.site-footer {
+  background: var(--green-deep); color: #fff; padding: 70px 0 34px; margin-top: 8px;
+}
+footer.site-footer .eyebrow { color: var(--sleeping-pink); }
+footer.site-footer h2 { color: #fff; }
+
+.footer-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 40px; margin-bottom: 46px; }
+.footer-grid h3 {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; text-transform: uppercase;
+  color: var(--sleeping-pink); margin-bottom: 10px; font-weight: 500;
+}
+.footer-grid a.big {
+  font-family: 'Fraunces', serif; font-size: 1.4rem; text-decoration: none; color: #fff;
+  border-bottom: 2px solid rgba(255,255,255,0.35);
+}
+.footer-grid a.big:hover { border-color: var(--growing-pink); color: var(--sleeping-pink); }
+.footer-grid p.line { margin: 4px 0; font-size: 0.95rem; opacity: 0.85; font-family: 'IBM Plex Mono', monospace; }
+.footer-grid nav { display: flex; flex-direction: column; gap: 8px; }
+.footer-grid nav a { text-decoration: none; font-size: 0.92rem; opacity: 0.9; }
+.footer-grid nav a:hover { color: var(--sleeping-pink); }
+
+.visibility-note {
+  padding: 14px 18px; border: 1px solid rgba(255,255,255,0.25); border-radius: 12px;
+  font-size: 0.82rem; opacity: 0.85; margin-bottom: 30px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.2); padding-top: 22px;
+  font-size: 0.8rem; opacity: 0.65; text-align: center; font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ---------- Subpages: gallery ---------- */
+
+.page-hero {
+  padding: 56px 0 20px;
+}
+.page-hero .eyebrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--growing-pink);
+  text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 10px;
+}
+.page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+.page-hero p { margin-top: 14px; max-width: 60ch; color: var(--ink-soft); }
+
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 30px 0 70px; }
+.gallery figure { margin: 0; background: var(--paper); border-radius: 18px; padding: 14px 14px 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+.gallery figure img,
+.gallery figure video { width: 100%; object-position: bottom center; border-radius: 12px; display: block; background: var(--shy-pink); }
+.gallery figcaption { margin-top: 12px; font-size: 0.92rem; font-weight: 500; }
+.gallery figcaption .tools {
+  display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+  color: var(--growing-pink); margin-top: 3px; font-weight: 400;
+}
+
+.portrait { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 30px 0 70px; }
+.portrait figure { margin: 0; background: var(--paper); border-radius: 18px; padding: 14px 14px 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+.portrait figure img,
+.portrait figure video { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: bottom center; border-radius: 12px; display: block; background: var(--shy-pink); }
+.portrait figcaption { margin-top: 12px; font-size: 0.92rem; font-weight: 500; }
+.portrait figcaption .tools {
+  display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+  color: var(--growing-pink); margin-top: 3px; font-weight: 400;
+}
+
+.video { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 30px 0 70px; }
+.video figure { margin: 0; background: var(--paper); border-radius: 18px; padding: 14px 14px 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+.video figure img,
+.video figure video { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: bottom center; border-radius: 12px; display: block; background: var(--shy-pink); }
+.video figcaption { margin-top: 12px; font-size: 0.92rem; font-weight: 500; }
+.video figcaption .tools {
+  display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+  color: var(--growing-pink); margin-top: 3px; font-weight: 400;
+}
+
+@media (max-width: 880px) { .gallery { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .gallery { grid-template-columns: 1fr; } }
+
+.placeholder-tile {
+  height: 220px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  background: var(--shy-pink); color: var(--growing-pink); flex-direction: column; gap: 8px;
+  border: 1.5px dashed var(--growing-pink);
+}
+.placeholder-tile svg { width: 34px; height: 34px; }
+.placeholder-tile span { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-align: center; padding: 0 14px; }
+
+.subnav { display: flex; gap: 10px; flex-wrap: wrap; padding-bottom: 10px; }
+.subnav a {
+  text-decoration: none; font-size: 0.84rem; padding: 8px 16px; border-radius: 20px;
+  border: 1.5px solid var(--line); color: var(--ink-soft);
+}
+.subnav a:hover, .subnav a.active { border-color: var(--growing-pink); color: var(--growing-pink); }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--growing-pink); outline-offset: 3px; }
+
+@media (max-width: 820px) { .footer-grid { grid-template-columns: 1fr; gap: 30px; } }
+@media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Fotografie: Gruppentitel + Bilder ohne Rahmen/Beschriftung ---------- */
+.photo-section-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--growing-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 40px 0 16px;
+}
+.photo-section-title:first-of-type { margin-top: 10px; }
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-bottom: 10px;
+}
+.photo-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+@media (max-width: 880px) { .photo-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
