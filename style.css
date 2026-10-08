@@ -425,3 +425,32 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--growing-pink); 
 
 @media (max-width: 880px) { .photo-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Illustrationsseite ---------- */
+
+/* GROSSE ILLUSTRATIONEN: 2 Boxen mit kleinem Text darunter */
+.gallery.gallery-large { grid-template-columns: repeat(2, 1fr); gap: 32px; padding: 0 0 50px; }
+.gallery.gallery-large figure { background: var(--paper); border-radius: 22px; padding: 18px 18px 20px; box-shadow: 0 10px 28px rgba(0,0,0,0.07); }
+.gallery.gallery-large .bild { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; background: color-mix(in srgb, black 3%, white); }
+.gallery.gallery-large img { width: 100%; height: 100%; object-fit: contain; background: transparent; border-radius: 0; transform: scale(var(--zoom, 1)); }
+.gallery.gallery-large figcaption { margin-top: 14px; font-size: 0.85rem; }
+.gallery.gallery-large figcaption .tools { font-size: 0.7rem; }
+
+/* KLEINE ILLUSTRATIONEN: eine gemeinsame Fläche, keine einzelnen Boxen, keine Texte */
+.gallery.gallery-small {
+  grid-template-columns: repeat(3, 1fr); gap: 20px 24px; padding: 40px; margin-bottom: 70px;
+  background: var(--panel-bg, color-mix(in srgb, black 4%, white)); border-radius: 26px;
+}
+.gallery.gallery-small figure { background: none; box-shadow: none; padding: 0; border-radius: 0; }
+.gallery.gallery-small figcaption { display: none; }
+.gallery.gallery-small img {
+  aspect-ratio: 1 / 1; box-sizing: border-box; padding: 12%;
+  object-fit: contain; background: transparent; border-radius: 0; transform: scale(var(--zoom, 1));
+}
+
+/* Kleinere Bildschirme */
+@media (max-width: 880px) { .gallery.gallery-small { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) {
+  .gallery.gallery-large, .gallery.gallery-small { grid-template-columns: 1fr; }
+  .gallery.gallery-small { padding: 24px; }
+}
