@@ -431,8 +431,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--growing-pink); 
 /* GROSSE ILLUSTRATIONEN: 2 Boxen mit kleinem Text darunter */
 .gallery.gallery-large { grid-template-columns: repeat(2, 1fr); gap: 32px; padding: 0 0 50px; }
 .gallery.gallery-large figure { background: var(--paper); border-radius: 22px; padding: 18px 18px 20px; box-shadow: 0 10px 28px rgba(0,0,0,0.07); }
-.gallery.gallery-large .bild { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; background: color-mix(in srgb, black 3%, white); }
-.gallery.gallery-large img { width: 100%; height: 100%; object-fit: contain; background: transparent; border-radius: 0; transform: scale(var(--zoom, 1)); }
+.gallery.gallery-large .bild { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; background: transparent; }.gallery.gallery-large img { width: 100%; height: 100%; object-fit: contain; background: transparent; border-radius: 0; transform: scale(var(--zoom, 1)); }
 .gallery.gallery-large figcaption { margin-top: 14px; font-size: 0.85rem; }
 .gallery.gallery-large figcaption .tools { font-size: 0.7rem; }
 
@@ -453,4 +452,44 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--growing-pink); 
 @media (max-width: 560px) {
   .gallery.gallery-large, .gallery.gallery-small { grid-template-columns: 1fr; }
   .gallery.gallery-small { padding: 24px; }
+}
+
+/* ============================================================
+   DESIGN-SEITE: 3 Projekte
+   ============================================================ */
+.design-project { margin-top: 80px; }
+.page-hero + .design-project { margin-top: 40px; }
+
+/* Kopf mit Nummer, Titel, Text */
+.design-head { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 30px; }
+.design-nr { font-family: 'Fraunces', serif; font-size: 3rem; line-height: 1; color: var(--growing-pink); }
+.design-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.design-head p { margin: 10px 0 0; max-width: 62ch; color: var(--ink-soft); }
+.design-head .design-tools { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: var(--growing-pink); }
+
+/* Bilder: nie zugeschnitten, ohne Rahmen und Karte */
+.design-fig { margin: 0; }
+.design-fig a { display: block; }
+.design-img {
+  width: 100%; height: auto; display: block; border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);   /* Zeile löschen = kein Schatten */
+}
+.design-fig figcaption { margin-top: 10px; font-size: 0.85rem; color: var(--ink-soft); }
+
+/* Raster */
+.design-row { display: grid; gap: 28px; align-items: start; }
+.design-row.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.design-row.cols-poster { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); }
+.design-row.narrow { max-width: 62%; }
+
+/* Zwischentitel */
+.design-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--growing-pink);
+  text-transform: uppercase; letter-spacing: 0.06em; margin: 40px 0 16px;
+}
+
+@media (max-width: 720px) {
+  .design-row.cols-2, .design-row.cols-poster { grid-template-columns: 1fr; }
+  .design-row.narrow { max-width: 100%; }
+  .design-head { flex-direction: column; gap: 8px; }
 }
