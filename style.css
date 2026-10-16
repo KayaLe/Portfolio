@@ -486,3 +486,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--growing-pink); 
   .design-row.narrow { max-width: 100%; }
   .design-head { flex-direction: column; gap: 8px; }
 }
+
+/* ---------- Home-Button (alle Unterseiten) ---------- */
+.home-wrap { display: flex; justify-content: center; padding: 60px 0 70px; }
+.home-btn {
+  display: inline-block; text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 500;
+  padding: 12px 26px; border-radius: 30px;
+  color: #fff; background: var(--growing-pink); border: 1.5px solid var(--growing-pink);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.home-btn:hover { background: var(--black); border-color: var(--black); transform: translateY(-2px); }
